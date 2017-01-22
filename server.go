@@ -10,7 +10,7 @@ import (
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hi there - this page was served using Go \\o/")
+	fmt.Fprintf(w, "hello world")
 }
 func main() {
 	bot, err := linebot.New(
@@ -39,7 +39,7 @@ func main() {
 				switch message := event.Message.(type) {
 				case *linebot.TextMessage:
 					fmt.Printf("%v", message)
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("連絡ありがとうございます。citygiftは対話型サービスとなっています。 citygiftについてもっと知りたい方は、『citygiftとは？』と入力ください プランをお探しの方は、『プランスタート』と入力ください プランを投稿される方は、『プラン投稿』と入力ください。")).Do(); err != nil {
 						log.Print(err)
 					}
 				}
