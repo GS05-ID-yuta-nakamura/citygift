@@ -60,7 +60,7 @@ func main() {
 				//位置情報
 				case *linebot.LocationMessage:
 					fmt.Printf("%v", message)
-					imageURL := "https://citygifttest.azurewebsites.net//static/top.jpg"
+					imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
 					template := linebot.NewButtonsTemplate(
 						imageURL, "My button sample", "Hello, my button",
 						linebot.NewURITemplateAction("Go to line.me", "https://line.me"),
