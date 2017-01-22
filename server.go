@@ -39,7 +39,7 @@ func main() {
 				switch message := event.Message.(type) {
 				case *linebot.TextMessage:
 					fmt.Printf("%v", message)
-
+					//textmessage
 					if userRequest := message.Text; userRequest == "citygiftとは？" {
 						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("aa")).Do(); err != nil {
 							log.Print(err)
@@ -56,6 +56,12 @@ func main() {
 						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("連絡ありがとうございます。citygiftは対話型サービスとなっています。 citygiftについてもっと知りたい方は、『citygiftとは？』と入力ください プランをお探しの方は、『プランスタート』と入力ください プランを投稿される方は、『プラン投稿』と入力ください。")).Do(); err != nil {
 							log.Print(err)
 						}
+					}
+				//位置情報
+				case *linebot.LocationMessage:
+					fmt.Printf("%v", message)
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Address)).Do(); err != nil {
+						log.Print(err)
 					}
 				}
 			} else if event.Type == linebot.EventTypeFollow {
