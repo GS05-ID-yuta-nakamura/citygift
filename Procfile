@@ -1,1 +1,1 @@
-web: demoapp
+web:citygift_bot_azure

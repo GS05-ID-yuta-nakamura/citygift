@@ -1,8 +1,14 @@
-application: goraspi-introbook
-version: 1
+application: citygift01
+module: default
+version: alpha
 runtime: go
 api_version: go1
 
 handlers:
--url: /.*
- script:_go_app
+- url: /
+  mime_type: text/html
+  static_files: public/index.html
+  upload: public/index.html
+
+- url: /.*
+  script: _go_app

@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/heroku/glacial-wildwood-70505",
+	"ImportPath": "github.com/gogit/citygift_bot_azure",
 	"GoVersion": "go1.7",
 	"GodepVersion": "v77",
 	"Deps": [
