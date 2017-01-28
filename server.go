@@ -71,6 +71,7 @@ func main() {
 					// if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTemplateMessage("Buttons alt text", template)).Do(); err != nil {
 					// 	log.Print(err)
 					// }
+					fmt.Printf("%v", message)
 					template := linebot.NewConfirmTemplate(
 						"Do it?",
 						linebot.NewMessageTemplateAction("Yes", "Yes!"),
