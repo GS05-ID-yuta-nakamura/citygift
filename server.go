@@ -37,19 +37,15 @@ func main() {
 		c.HTML(http.StatusOK, "index.tmpl.html", nil)
 	})
 
-	http.HandleFunc("/", handler)
-	// Setup HTTP Server for receiving requests from LINE platform
-	http.HandleFunc("/callback", func(w http.ResponseWriter, req *http.Request) {
-		fmt.Printf("ping\n")
-		events, err := bot.ParseRequest(req)
+	router.POST("/callback", func(c *gin.Context) {
+		events, err := bot.ParseRequest(c.Request)
 		if err != nil {
 			if err == linebot.ErrInvalidSignature {
-				w.WriteHeader(400)
-			} else {
-				w.WriteHeader(500)
+				log.Print(err)
 			}
 			return
 		}
+
 		for _, event := range events {
 			if event.Type == linebot.EventTypeMessage {
 				switch message := event.Message.(type) {
@@ -107,10 +103,6 @@ func main() {
 			}
 		}
 	})
-
-	// This is just a sample code.
-	// For actually use, you must support HTTPS by using `ListenAndServeTLS`, reverse proxy or etc.
-	fmt.Printf("サーバーを起動しています...")
 
 	router.Run(":" + port)
 }
