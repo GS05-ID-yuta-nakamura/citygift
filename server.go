@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/gin-gonic/gin"
 	"github.com/line/line-bot-sdk-go/linebot"
 )
 
@@ -14,12 +13,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "hello world")
 }
 func main() {
-	port := os.Getenv("PORT")
-
-	if port == "" {
-		log.Fatal("$PORT must be set")
-	}
-
 	bot, err := linebot.New(
 		os.Getenv("LINE_CHANNEL_SECRET"),
 		os.Getenv("LINE_CHANNEL_ACCESS_TOKEN"),
@@ -28,24 +21,19 @@ func main() {
 		log.Fatal(err)
 	}
 
-	router := gin.New()
-	router.Use(gin.Logger())
-	router.LoadHTMLGlob("templates/*.tmpl.html")
-	router.Static("/static", "static")
-
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.tmpl.html", nil)
-	})
-
-	router.POST("/callback", func(c *gin.Context) {
-		events, err := bot.ParseRequest(c.Request)
+	http.HandleFunc("/", handler)
+	// Setup HTTP Server for receiving requests from LINE platform
+	http.HandleFunc("/callback", func(w http.ResponseWriter, req *http.Request) {
+		fmt.Printf("ping\n")
+		events, err := bot.ParseRequest(req)
 		if err != nil {
 			if err == linebot.ErrInvalidSignature {
-				log.Print(err)
+				w.WriteHeader(400)
+			} else {
+				w.WriteHeader(500)
 			}
 			return
 		}
-
 		for _, event := range events {
 			if event.Type == linebot.EventTypeMessage {
 				switch message := event.Message.(type) {
@@ -104,7 +92,13 @@ func main() {
 		}
 	})
 
-	router.Run(":" + port)
+	// This is just a sample code.
+	// For actually use, you must support HTTPS by using `ListenAndServeTLS`, reverse proxy or etc.
+	fmt.Printf("サーバーを起動しています...")
+
+	if err := http.ListenAndServe(":"+os.Getenv("PORT"), nil); err != nil {
+		log.Fatal(err)
+	}
 }
 
 //check
