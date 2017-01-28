@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/gin-gonic/gin"
 	"github.com/line/line-bot-sdk-go/linebot"
 )
 
@@ -13,6 +14,12 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "hello world")
 }
 func main() {
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
+
 	bot, err := linebot.New(
 		os.Getenv("LINE_CHANNEL_SECRET"),
 		os.Getenv("LINE_CHANNEL_ACCESS_TOKEN"),
@@ -20,6 +27,15 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	router := gin.New()
+	router.Use(gin.Logger())
+	router.LoadHTMLGlob("templates/*.tmpl.html")
+	router.Static("/static", "static")
+
+	router.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.tmpl.html", nil)
+	})
 
 	http.HandleFunc("/", handler)
 	// Setup HTTP Server for receiving requests from LINE platform
@@ -96,9 +112,7 @@ func main() {
 	// For actually use, you must support HTTPS by using `ListenAndServeTLS`, reverse proxy or etc.
 	fmt.Printf("サーバーを起動しています...")
 
-	if err := http.ListenAndServe(":"+os.Getenv("HTTP_PLATFORM_PORT"), nil); err != nil {
-		log.Fatal(err)
-	}
+	router.Run(":" + port)
 }
 
 //check
