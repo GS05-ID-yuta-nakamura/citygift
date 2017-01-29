@@ -73,8 +73,8 @@ func main() {
 					// }
 					template := linebot.NewConfirmTemplate(
 						"Do it?",
-						linebot.NewMessageTemplateAction("Yes", "Yes!"),
-						linebot.NewMessageTemplateAction("No", "No!"),
+						linebot.NewMessageTemplateAction("Yes", "Yes"),
+						linebot.NewMessageTemplateAction("No", "No"),
 					)
 					if _, err := bot.ReplyMessage(
 						event.ReplyToken,
