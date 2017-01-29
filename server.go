@@ -52,9 +52,11 @@ func main() {
 							log.Print(err)
 						}
 					} else if userRequest == "confirm" {
-						fmt.Printf("confirm")
+						fmt.Printf("left")
 						left := linebot.NewMessageTemplateAction("Yes", "Yes!")
+						fmt.Printf("right")
 						right := linebot.NewMessageTemplateAction("No", "No!")
+						fmt.Printf("templete")
 						template := linebot.NewConfirmTemplate(
 							"Do it?",
 							left,
@@ -63,6 +65,7 @@ func main() {
 						fmt.Printf("%v", template)
 						fmt.Printf("%v", left)
 						fmt.Printf("%v", right)
+						fmt.Printf("replycontent")
 						replycontent := linebot.NewTemplateMessage("Confirm alt text", template)
 						fmt.Printf("%v", replycontent)
 						if _, err := bot.ReplyMessage(
