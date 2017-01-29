@@ -35,6 +35,9 @@ func main() {
 		}
 		for _, event := range events {
 			if event.Type == linebot.EventTypeMessage {
+				//userID指定
+				source := event.Source.UserID
+				fmt.Printf("%v", source)
 				switch message := event.Message.(type) {
 				case *linebot.TextMessage:
 					fmt.Printf("%v", message)
@@ -52,10 +55,10 @@ func main() {
 							log.Print(err)
 						}
 					} else if userRequest == "confirm" {
-						left := linebot.NewMessageTemplateAction("Yes", "Yes!")
+						left := linebot.NewMessageTemplateAction("Yes", "Yes")
 						fmt.Printf("left")
 						fmt.Printf("%v", left)
-						right := linebot.NewMessageTemplateAction("No", "No!")
+						right := linebot.NewMessageTemplateAction("No", "No")
 						fmt.Printf("right")
 						fmt.Printf("%v", right)
 						fmt.Printf("templete")
@@ -72,7 +75,7 @@ func main() {
 							event.ReplyToken,
 							replycontent,
 						).Do(); err != nil {
-							log.Print(err)
+							fmt.Printf("%v", err)
 						}
 					} else {
 						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("連絡ありがとうございます。citygiftは対話型サービスとなっています。 citygiftについてもっと知りたい方は、『citygiftとは？』と入力ください プランをお探しの方は、『プランスタート』と入力ください プランを投稿される方は、『プラン投稿』と入力ください。")).Do(); err != nil {
