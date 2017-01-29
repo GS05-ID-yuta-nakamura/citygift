@@ -36,6 +36,7 @@ func main() {
 		for _, event := range events {
 			if event.Type == linebot.EventTypeMessage {
 				//userID指定
+				fmt.Printf("UserID")
 				source := event.Source.UserID
 				fmt.Printf("%v", source)
 				switch message := event.Message.(type) {
@@ -55,10 +56,10 @@ func main() {
 							log.Print(err)
 						}
 					} else if userRequest == "confirm" {
-						left := linebot.NewMessageTemplateAction("Yes", "Yes")
+						left := linebot.NewPostbackTemplateAction("Yes", "Yes", "Yes")
 						fmt.Printf("left")
 						fmt.Printf("%v", left)
-						right := linebot.NewMessageTemplateAction("No", "No")
+						right := linebot.NewPostbackTemplateAction("No", "No", "No")
 						fmt.Printf("right")
 						fmt.Printf("%v", right)
 						fmt.Printf("templete")
