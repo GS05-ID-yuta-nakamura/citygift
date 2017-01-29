@@ -79,7 +79,8 @@ func main() {
 					)
 					if _, err := bot.ReplyMessage(
 						event.ReplyToken,
-						linebot.NewTemplateMessage("Confirm alt text", template)).Do(); err != nil {
+						linebot.NewTemplateMessage("Confirm alt text", template),
+					).Do(); err != nil {
 						log.Print(err)
 					}
 				}
