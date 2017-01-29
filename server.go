@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
@@ -13,8 +14,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 func main() {
 	bot, err := linebot.New(
-		"476d25dd83bd1f41c82952d0aa01919f",
-		"XtiilwvVjxg7wHxVITFdPeb+yuC3zrzRUH+8YdgYu96vnkk7sqrLYKZ8CENpGi15Bls/s8GHCJHhEwyQUuSn09XzxaJAifCALrCyBiTMOCYm280ltAC0gXRuP/znjtvYcGUpcOiyJT9qJtGY0cyZzgdB04t89/1O/w1cDnyilFU=",
+		os.Getenv("LINE_CHANNEL_SECRET"),
+		os.Getenv("LINE_CHANNEL_ACCESS_TOKEN"),
 	)
 	if err != nil {
 		log.Fatal(err)
@@ -35,10 +36,6 @@ func main() {
 		}
 		for _, event := range events {
 			if event.Type == linebot.EventTypeMessage {
-				//userID指定
-				fmt.Printf("UserID")
-				source := event.Source.UserID
-				fmt.Printf("%v", source)
 				switch message := event.Message.(type) {
 				case *linebot.TextMessage:
 					fmt.Printf("%v", message)
@@ -56,27 +53,16 @@ func main() {
 							log.Print(err)
 						}
 					} else if userRequest == "confirm" {
-						left := linebot.NewPostbackTemplateAction("Yes", "Yes", "Yes")
-						fmt.Printf("left")
-						fmt.Printf("%v", left)
-						right := linebot.NewPostbackTemplateAction("No", "No", "No")
-						fmt.Printf("right")
-						fmt.Printf("%v", right)
-						fmt.Printf("templete")
 						template := linebot.NewConfirmTemplate(
 							"Do it?",
-							left,
-							right,
+							linebot.NewMessageTemplateAction("Yes", "Yes!"),
+							linebot.NewMessageTemplateAction("No", "No!"),
 						)
-						fmt.Printf("%v", template)
-						fmt.Printf("replycontent")
-						replycontent := linebot.NewTemplateMessage("Confirm alt text", template)
-						fmt.Printf("%v", replycontent)
 						if _, err := bot.ReplyMessage(
 							event.ReplyToken,
-							replycontent,
+							linebot.NewTemplateMessage("Confirm alt text", template),
 						).Do(); err != nil {
-							fmt.Printf("%v", err)
+							log.Print(err)
 						}
 					} else {
 						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("連絡ありがとうございます。citygiftは対話型サービスとなっています。 citygiftについてもっと知りたい方は、『citygiftとは？』と入力ください プランをお探しの方は、『プランスタート』と入力ください プランを投稿される方は、『プラン投稿』と入力ください。")).Do(); err != nil {
@@ -111,7 +97,7 @@ func main() {
 	// For actually use, you must support HTTPS by using `ListenAndServeTLS`, reverse proxy or etc.
 	fmt.Printf("サーバーを起動しています...")
 
-	if err := http.ListenAndServe(":1337", nil); err != nil {
+	if err := http.ListenAndServe(":"+os.Getenv("HTTP_PLATFORM_PORT"), nil); err != nil {
 		log.Fatal(err)
 	}
 }
