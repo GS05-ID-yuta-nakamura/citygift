@@ -52,10 +52,6 @@ func main() {
 						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("cc")).Do(); err != nil {
 							log.Print(err)
 						}
-					} else if userRequest == "button" {
-						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("cc")).Do(); err != nil {
-							log.Print(err)
-						}
 					} else {
 						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("連絡ありがとうございます。citygiftは対話型サービスとなっています。 citygiftについてもっと知りたい方は、『citygiftとは？』と入力ください プランをお探しの方は、『プランスタート』と入力ください プランを投稿される方は、『プラン投稿』と入力ください。")).Do(); err != nil {
 							log.Print(err)
@@ -75,7 +71,6 @@ func main() {
 					// if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTemplateMessage("Buttons alt text", template)).Do(); err != nil {
 					// 	log.Print(err)
 					// }
-					fmt.Printf("%v", message)
 					template := linebot.NewConfirmTemplate(
 						"Do it?",
 						linebot.NewMessageTemplateAction("Yes", "Yes!"),
@@ -89,8 +84,7 @@ func main() {
 					}
 				}
 			} else if event.Type == linebot.EventTypeFollow {
-				if _, err = bot.ReplyMessage(
-					event.ReplyToken, linebot.NewTextMessage("友達追加ありがとうございます。街歩き体験サービス『citygift』の公式アカウントです！citygiftについてもっと知りたい方は、『citygiftとは？』と入力ください(wink)プランをお探しの方は、『プランスタート』と入力くださいプランを投稿される方は、『プラン投稿』と入力ください。")).Do(); err != nil {
+				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("友達追加ありがとうございます。街歩き体験サービス『citygift』の公式アカウントです！citygiftについてもっと知りたい方は、『citygiftとは？』と入力ください(wink)プランをお探しの方は、『プランスタート』と入力くださいプランを投稿される方は、『プラン投稿』と入力ください。")).Do(); err != nil {
 					log.Print(err)
 				}
 			}
@@ -101,7 +95,7 @@ func main() {
 	// For actually use, you must support HTTPS by using `ListenAndServeTLS`, reverse proxy or etc.
 	fmt.Printf("サーバーを起動しています...")
 
-	if err := http.ListenAndServe(":"+os.Getenv("PORT"), nil); err != nil {
+	if err := http.ListenAndServe(":"+os.Getenv("HTTP_PLATFORM_PORT"), nil); err != nil {
 		log.Fatal(err)
 	}
 }
