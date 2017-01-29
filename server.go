@@ -52,6 +52,20 @@ func main() {
 						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("cc")).Do(); err != nil {
 							log.Print(err)
 						}
+					} else if userRequest == "confirm" {
+						if _, err := bot.ReplyMessage(
+							event.ReplyToken,
+							linebot.NewTemplateMessage(
+								"Confirm alt text",
+								linebot.NewConfirmTemplate(
+									"Do it?",
+									linebot.NewPostbackTemplateAction("Yes", "Yes", "Yes"),
+									linebot.NewPostbackTemplateAction("No", "No", "No"),
+								),
+							),
+						).Do(); err != nil {
+							log.Print(err)
+						}
 					} else {
 						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("連絡ありがとうございます。citygiftは対話型サービスとなっています。 citygiftについてもっと知りたい方は、『citygiftとは？』と入力ください プランをお探しの方は、『プランスタート』と入力ください プランを投稿される方は、『プラン投稿』と入力ください。")).Do(); err != nil {
 							log.Print(err)
