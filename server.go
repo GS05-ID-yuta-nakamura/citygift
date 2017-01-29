@@ -95,7 +95,6 @@ func main() {
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("dd")).Do(); err != nil {
 						log.Print(err)
 					}
-					fmt.Printf("%", postdata)
 				}
 
 			}
