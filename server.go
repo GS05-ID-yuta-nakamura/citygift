@@ -71,14 +71,21 @@ func main() {
 					// if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTemplateMessage("Buttons alt text", template)).Do(); err != nil {
 					// 	log.Print(err)
 					// }
-					template := linebot.NewConfirmTemplate(
-						"Do it?",
-						linebot.NewMessageTemplateAction("Yes", "Yes"),
-						linebot.NewMessageTemplateAction("No", "No"),
-					)
+					// template := linebot.NewConfirmTemplate(
+					// 	"Do it?",
+					// 	linebot.NewMessageTemplateAction("Yes", "Yes"),
+					// 	linebot.NewMessageTemplateAction("No", "No"),
+					// )
 					if _, err := bot.ReplyMessage(
 						event.ReplyToken,
-						linebot.NewTemplateMessage("Confirm alt text", template),
+						linebot.NewTemplateMessage(
+							"Confirm alt text",
+							linebot.NewConfirmTemplate(
+								"Do it?",
+								linebot.NewMessageTemplateAction("Yes", "Yes"),
+								linebot.NewMessageTemplateAction("No", "No"),
+							),
+						),
 					).Do(); err != nil {
 						log.Print(err)
 					}
