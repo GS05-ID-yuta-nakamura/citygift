@@ -53,16 +53,14 @@ func main() {
 							log.Print(err)
 						}
 					} else if userRequest == "confirm" {
+						template := linebot.NewConfirmTemplate(
+							"Do it?",
+							linebot.NewMessageTemplateAction("Yes", "Yes!"),
+							linebot.NewMessageTemplateAction("No", "No!"),
+						)
 						if _, err := bot.ReplyMessage(
 							event.ReplyToken,
-							linebot.NewTemplateMessage(
-								"Confirm alt text",
-								linebot.NewConfirmTemplate(
-									"Do it?",
-									linebot.NewPostbackTemplateAction("Yes", "Yes", "Yes"),
-									linebot.NewPostbackTemplateAction("No", "No", "No"),
-								),
-							),
+							linebot.NewTemplateMessage("Confirm alt text", template),
 						).Do(); err != nil {
 							log.Print(err)
 						}
