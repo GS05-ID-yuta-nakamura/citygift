@@ -78,8 +78,8 @@ func main() {
 							"Confirm alt text",
 							linebot.NewConfirmTemplate(
 								"Do it?",
-								linebot.NewPostbackTemplateAction("yes", "yes", "yes"),
-								linebot.NewPostbackTemplateAction("No", "No", "No"),
+								linebot.NewPostbackTemplateAction("yes", "yes", ""),
+								linebot.NewPostbackTemplateAction("No", "No", ""),
 							),
 						),
 					).Do(); err != nil {
