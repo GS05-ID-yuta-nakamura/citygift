@@ -91,7 +91,7 @@ func main() {
 					log.Print(err)
 				}
 			} else if event.Type == linebot.EventTypePostback {
-				if postdata := event.Postback.Data; postdata == "yes" {
+				if postdata := event.Postback.Data; postdata == "Yes" {
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("dd")).Do(); err != nil {
 						log.Print(err)
 					}
