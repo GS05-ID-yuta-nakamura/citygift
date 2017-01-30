@@ -78,7 +78,7 @@ func main() {
 							"Confirm alt text",
 							linebot.NewConfirmTemplate(
 								"Do it?",
-								linebot.NewPostbackTemplateAction("Yes", "Yes", "Yes"),
+								linebot.NewPostbackTemplateAction("yes", "yes", "yes"),
 								linebot.NewPostbackTemplateAction("No", "No", "No"),
 							),
 						),
@@ -91,7 +91,7 @@ func main() {
 					log.Print(err)
 				}
 			} else if event.Type == linebot.EventTypePostback {
-				if postdata := event.Postback.Data; postdata == "Yes" {
+				if postdata := event.Postback.Data; postdata == "yes" {
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("dd")).Do(); err != nil {
 						log.Print(err)
 					}
