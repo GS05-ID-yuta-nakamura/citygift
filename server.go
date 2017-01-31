@@ -53,10 +53,13 @@ func main() {
 							log.Print(err)
 						}
 					} else if userRequest == "confirm" {
-						template := linebot.NewConfirmTemplate(
-							"Do it?",
-							linebot.NewMessageTemplateAction("Yes", "Yes!"),
-							linebot.NewMessageTemplateAction("No", "No!"),
+						imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
+						template := linebot.NewButtonsTemplate(
+							imageURL, "My button sample", "Hello, my button",
+							linebot.NewURITemplateAction("Go to line.me", "https://line.me"),
+							linebot.NewPostbackTemplateAction("Say hello1", "hello こんにちは", ""),
+							linebot.NewPostbackTemplateAction("言 hello2", "hello こんにちは", "hello こんにちは"),
+							linebot.NewMessageTemplateAction("Say message", "Rice=米"),
 						)
 						fmt.Printf("%v", template)
 						if _, err := bot.ReplyMessage(
@@ -72,15 +75,16 @@ func main() {
 					}
 				//位置情報
 				case *linebot.LocationMessage:
+					template := linebot.NewConfirmTemplate(
+						"Do it?",
+						linebot.NewPostbackTemplateAction("yes", "yes", ""),
+						linebot.NewPostbackTemplateAction("No", "No", ""),
+					)
 					if _, err := bot.ReplyMessage(
 						event.ReplyToken,
 						linebot.NewTemplateMessage(
 							"Confirm alt text",
-							linebot.NewConfirmTemplate(
-								"Do it?",
-								linebot.NewPostbackTemplateAction("yes", "yes", ""),
-								linebot.NewPostbackTemplateAction("No", "No", ""),
-							),
+							template,
 						),
 					).Do(); err != nil {
 						log.Print(err)
