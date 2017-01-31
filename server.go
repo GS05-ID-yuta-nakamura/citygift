@@ -66,7 +66,7 @@ func main() {
 						).Do(); err != nil {
 							log.Print(err)
 						}
-					} else if userRequest == "confirm" {
+					} else if userRequest == "hello Citygift" {
 						imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
 						phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 						template := linebot.NewButtonsTemplate(
