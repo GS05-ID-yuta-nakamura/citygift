@@ -100,8 +100,23 @@ func main() {
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(sorry)).Do(); err != nil {
 						log.Print(err)
 					}
+				} else if postdata == "a" {
+					imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
+					phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
+					template := linebot.NewButtonsTemplate(
+						imageURL, "Welcome to citygift", phrase,
+						linebot.NewURITemplateAction("citygiftとは？", "https://citygift-04.herokuapp.com/"),
+						linebot.NewPostbackTemplateAction("プランスタート", "a", ""),
+						linebot.NewPostbackTemplateAction("プラン投稿", "b", ""),
+					)
+					fmt.Printf("%v", template)
+					if _, err := bot.ReplyMessage(
+						event.ReplyToken,
+						linebot.NewTemplateMessage("Button template", template),
+					).Do(); err != nil {
+						log.Print(err)
+					}
 				}
-
 			}
 		}
 	})
