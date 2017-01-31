@@ -115,10 +115,13 @@ func main() {
 							linebot.NewMessageTemplateAction("Say message", "Rice=米"),
 						),
 					)
+					message1 := linebot.NewTextMessage("以下のareaからお好きな場所を選択するか位置情報をお送りください")
+					message2 := linebot.NewTemplateMessage("carousel template", template)
 					fmt.Printf("%v", template)
 					if _, err := bot.ReplyMessage(
 						event.ReplyToken,
-						linebot.NewTemplateMessage("Button template", template),
+						message1,
+						message2,
 					).Do(); err != nil {
 						log.Print(err)
 					}
