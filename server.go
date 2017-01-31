@@ -105,17 +105,56 @@ func main() {
 					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 					template := linebot.NewCarouselTemplate(
 						linebot.NewCarouselColumn(
-							imageURL, "hoge", "fuga",
-							linebot.NewURITemplateAction("Go to line.me", "https://line.me"),
-							linebot.NewPostbackTemplateAction("Say hello1", "hello こんにちは", ""),
+							imageURL, "渋谷エリア", "渋谷・表参道・原宿・代々木上原",
+							linebot.NewPostbackTemplateAction("選択", postdata+"a", ""),
 						),
 						linebot.NewCarouselColumn(
-							imageURL, "hoge", "fuga",
-							linebot.NewPostbackTemplateAction("言 hello2", "hello こんにちは", "hello こんにちは"),
-							linebot.NewMessageTemplateAction("Say message", "Rice=米"),
+							imageURL, "練馬エリア", "石神井公園・練馬・江古田",
+							linebot.NewPostbackTemplateAction("選択", postdata+"b", ""),
+						),
+						linebot.NewCarouselColumn(
+							imageURL, "鎌倉エリア", "鎌倉..",
+							linebot.NewPostbackTemplateAction("選択", postdata+"c", ""),
 						),
 					)
 					message1 := linebot.NewTextMessage("以下のareaからお好きな場所を選択するか位置情報をお送りください")
+					message2 := linebot.NewTemplateMessage("carousel template", template)
+					fmt.Printf("%v", template)
+					if _, err := bot.ReplyMessage(
+						event.ReplyToken,
+						message1,
+						message2,
+					).Do(); err != nil {
+						log.Print(err)
+					}
+				} else if postdata == "aa" {
+					imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
+					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
+					phrase := "時間を選択してください"
+					template := linebot.NewButtonsTemplate(
+						imageURL, "Welcome to citygift", phrase,
+						linebot.NewPostbackTemplateAction("1時間", postdata+"a", ""),
+						linebot.NewPostbackTemplateAction("1.5時間", postdata+"b", ""),
+						linebot.NewPostbackTemplateAction("2時間", postdata+"c", ""),
+						linebot.NewPostbackTemplateAction("3時間", postdata+"d", ""),
+					)
+					message := linebot.NewTemplateMessage("carousel template", template)
+					fmt.Printf("%v", template)
+					if _, err := bot.ReplyMessage(
+						event.ReplyToken,
+						message,
+					).Do(); err != nil {
+						log.Print(err)
+					}
+				} else if postdata == "aad" {
+					imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
+					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
+					phrase := "表参道エリア3時間満喫コース"
+					template := linebot.NewButtonsTemplate(
+						imageURL, "Welcome to citygift", phrase,
+						linebot.NewURITemplateAction("citygiftとは？", "https://citygift-04.herokuapp.com/"),
+					)
+					message1 := linebot.NewTextMessage("おすすめのプランを探して参りました。")
 					message2 := linebot.NewTemplateMessage("carousel template", template)
 					fmt.Printf("%v", template)
 					if _, err := bot.ReplyMessage(
