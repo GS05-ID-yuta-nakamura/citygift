@@ -54,17 +54,17 @@ func main() {
 						}
 					} else if userRequest == "confirm" {
 						imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
+						phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 						template := linebot.NewButtonsTemplate(
-							imageURL, "My button sample", "Hello, my button",
-							linebot.NewURITemplateAction("Go to line.me", "https://line.me"),
-							linebot.NewPostbackTemplateAction("Say hello1", "hello こんにちは", ""),
-							linebot.NewPostbackTemplateAction("言 hello2", "hello こんにちは", "hello こんにちは"),
-							linebot.NewMessageTemplateAction("Say message", "Rice=米"),
+							imageURL, "Citygiftへようこそ", phrase,
+							linebot.NewURITemplateAction("citygiftとは？", "https://citygift-04.herokuapp.com/"),
+							linebot.NewPostbackTemplateAction("プランスタート", "a", ""),
+							linebot.NewPostbackTemplateAction("プラン投稿", "b", ""),
 						)
 						fmt.Printf("%v", template)
 						if _, err := bot.ReplyMessage(
 							event.ReplyToken,
-							linebot.NewTemplateMessage("Confirm alt text", template),
+							linebot.NewTemplateMessage("Button template", template),
 						).Do(); err != nil {
 							log.Print(err)
 						}
@@ -95,8 +95,9 @@ func main() {
 					log.Print(err)
 				}
 			} else if event.Type == linebot.EventTypePostback {
-				if postdata := event.Postback.Data; postdata == "yes" {
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("dd")).Do(); err != nil {
+				if postdata := event.Postback.Data; postdata == "b" {
+					sorry := "プラン投稿機能はまだ実装できておりません。今しばらくお待ち下さい。"
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(sorry)).Do(); err != nil {
 						log.Print(err)
 					}
 				}
