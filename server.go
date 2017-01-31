@@ -156,17 +156,32 @@ func main() {
 					phrase := "表参道エリア3時間満喫コース"
 					template := linebot.NewButtonsTemplate(
 						imageURL, "Welcome to citygift", phrase,
-						linebot.NewURITemplateAction("citygiftとは？", "https://citygift-04.herokuapp.com/"),
+						linebot.NewURITemplateAction("webでみる", "https://citygift-04.herokuapp.com/"),
+					)
+					template2 := linebot.NewConfirmTemplate(
+						"こちらのプランでよろしいですか?",
+						linebot.NewPostbackTemplateAction("yes", "yes", ""),
+						linebot.NewPostbackTemplateAction("No", "No", ""),
 					)
 					message1 := linebot.NewTextMessage("おすすめのプランを探して参りました。")
 					message2 := linebot.NewTemplateMessage("carousel template", template)
-					message3 := linebot.NewTextMessage("プランを終了する時は『プラン終了』と入力ください。")
+					message3 := linebot.NewTemplateMessage("carousel template", template2)
 					fmt.Printf("%v", template)
 					if _, err := bot.ReplyMessage(
 						event.ReplyToken,
 						message1,
 						message2,
 						message3,
+					).Do(); err != nil {
+						log.Print(err)
+					}
+				} else if postdata := event.Postback.Data; postdata == "yes" {
+					message1 := linebot.NewTextMessage("ぜひお楽しみください。")
+					message2 := linebot.NewTextMessage("終了の際は『プラン終了』とご入力ください。")
+					if _, err := bot.ReplyMessage(
+						event.ReplyToken,
+						message1,
+						message2,
 					).Do(); err != nil {
 						log.Print(err)
 					}
