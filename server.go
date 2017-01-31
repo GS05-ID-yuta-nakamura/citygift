@@ -52,6 +52,10 @@ func main() {
 						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("cc")).Do(); err != nil {
 							log.Print(err)
 						}
+					} else if userRequest == "プラン終了" {
+						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("cc")).Do(); err != nil {
+							log.Print(err)
+						}
 					} else if userRequest == "confirm" {
 						imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
 						phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
@@ -156,11 +160,13 @@ func main() {
 					)
 					message1 := linebot.NewTextMessage("おすすめのプランを探して参りました。")
 					message2 := linebot.NewTemplateMessage("carousel template", template)
+					message3 := linebot.NewTextMessage("プランを終了する時は『プラン終了』と入力ください。")
 					fmt.Printf("%v", template)
 					if _, err := bot.ReplyMessage(
 						event.ReplyToken,
 						message1,
 						message2,
+						message3,
 					).Do(); err != nil {
 						log.Print(err)
 					}
