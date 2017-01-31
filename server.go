@@ -56,7 +56,7 @@ func main() {
 						imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
 						phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 						template := linebot.NewButtonsTemplate(
-							imageURL, "Citygiftへようこそ", phrase,
+							imageURL, "Welcome to citygift", phrase,
 							linebot.NewURITemplateAction("citygiftとは？", "https://citygift-04.herokuapp.com/"),
 							linebot.NewPostbackTemplateAction("プランスタート", "a", ""),
 							linebot.NewPostbackTemplateAction("プラン投稿", "b", ""),
@@ -102,12 +102,18 @@ func main() {
 					}
 				} else if postdata == "a" {
 					imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
-					phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
-					template := linebot.NewButtonsTemplate(
-						imageURL, "Welcome to citygift", phrase,
-						linebot.NewURITemplateAction("citygiftとは？", "https://citygift-04.herokuapp.com/"),
-						linebot.NewPostbackTemplateAction("プランスタート", "a", ""),
-						linebot.NewPostbackTemplateAction("プラン投稿", "b", ""),
+					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
+					template := linebot.NewCarouselTemplate(
+						linebot.NewCarouselColumn(
+							imageURL, "hoge", "fuga",
+							linebot.NewURITemplateAction("Go to line.me", "https://line.me"),
+							linebot.NewPostbackTemplateAction("Say hello1", "hello こんにちは", ""),
+						),
+						linebot.NewCarouselColumn(
+							imageURL, "hoge", "fuga",
+							linebot.NewPostbackTemplateAction("言 hello2", "hello こんにちは", "hello こんにちは"),
+							linebot.NewMessageTemplateAction("Say message", "Rice=米"),
+						),
 					)
 					fmt.Printf("%v", template)
 					if _, err := bot.ReplyMessage(
