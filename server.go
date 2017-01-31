@@ -53,7 +53,17 @@ func main() {
 							log.Print(err)
 						}
 					} else if userRequest == "プラン終了" {
-						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("cc")).Do(); err != nil {
+						imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
+						phrase := "いかがでしたでしょうか？近くにあるオススメスポットを紹介いたします。"
+						template := linebot.NewButtonsTemplate(
+							imageURL, "Thank you for your coming", phrase,
+							linebot.NewURITemplateAction("G's academy", "https://citygift-04.herokuapp.com/"),
+							linebot.NewURITemplateAction("citygift公式", "https://citygift-04.herokuapp.com/"),
+						)
+						if _, err := bot.ReplyMessage(
+							event.ReplyToken,
+							linebot.NewTemplateMessage("Button template", template),
+						).Do(); err != nil {
 							log.Print(err)
 						}
 					} else if userRequest == "confirm" {
