@@ -40,19 +40,7 @@ func main() {
 				case *linebot.TextMessage:
 					fmt.Printf("%v", message)
 					//textmessage
-					if userRequest := message.Text; userRequest == "citygiftとは？" {
-						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("aa")).Do(); err != nil {
-							log.Print(err)
-						}
-					} else if userRequest == "プランスタート" {
-						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("bb")).Do(); err != nil {
-							log.Print(err)
-						}
-					} else if userRequest == "プラン投稿" {
-						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("cc")).Do(); err != nil {
-							log.Print(err)
-						}
-					} else if userRequest == "プラン終了" {
+					if userRequest := message.Text; userRequest == "プラン終了" {
 						imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
 						phrase := "いかがでしたでしょうか？近くにあるオススメスポットを紹介いたします。"
 						template := linebot.NewButtonsTemplate(
@@ -66,7 +54,7 @@ func main() {
 						).Do(); err != nil {
 							log.Print(err)
 						}
-					} else if userRequest == "hello Citygift" {
+					} else {
 						imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
 						phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 						template := linebot.NewButtonsTemplate(
@@ -80,10 +68,6 @@ func main() {
 							event.ReplyToken,
 							linebot.NewTemplateMessage("Button template", template),
 						).Do(); err != nil {
-							log.Print(err)
-						}
-					} else {
-						if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("連絡ありがとうございます。citygiftは対話型サービスとなっています。 citygiftについてもっと知りたい方は、『citygiftとは？』と入力ください プランをお探しの方は、『プランスタート』と入力ください プランを投稿される方は、『プラン投稿』と入力ください。")).Do(); err != nil {
 							log.Print(err)
 						}
 					}
