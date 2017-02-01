@@ -123,10 +123,12 @@ func main() {
 				} else if postdata == "getplan," {
 					imageURL := "https://citygifttest.azurewebsites.net/github.com/citygift/static/top.jpg"
 					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
+					shibuya := postdata + "a_shibuya,"
+					fmt.Printf("%v", shibuya)
 					template := linebot.NewCarouselTemplate(
 						linebot.NewCarouselColumn(
 							imageURL, "渋谷エリア", "渋谷・表参道・原宿・代々木上原",
-							linebot.NewPostbackTemplateAction("選択", postdata+"a_shibuya,", ""),
+							linebot.NewPostbackTemplateAction("選択", shibuya, ""),
 						),
 						linebot.NewCarouselColumn(
 							imageURL, "練馬エリア", "石神井公園・練馬・江古田",
