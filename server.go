@@ -147,7 +147,7 @@ func main() {
 					).Do(); err != nil {
 						log.Print(err)
 					}
-				} else if postdata == "getplan,a_shibuya,a" {
+				} else if postdata == "getplan,a_shibuya,d" {
 					imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
 					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 					phrase := "表参道エリア3時間満喫コース"
@@ -172,16 +172,16 @@ func main() {
 					).Do(); err != nil {
 						log.Print(err)
 					}
-				} else if strings.LastIndexAny(postdata, "getplan") > 0 {
+				} else if strings.LastIndexAny(postdata, "getplan") > 0 && strings.LastIndexAny(postdata, ",t_") < 0 {
 					imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
 					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 					phrase := "時間を選択してください"
 					template := linebot.NewButtonsTemplate(
 						imageURL, "Welcome to citygift", phrase,
-						linebot.NewPostbackTemplateAction("1時間", postdata+"a", ""),
-						linebot.NewPostbackTemplateAction("1.5時間", postdata+"b", ""),
-						linebot.NewPostbackTemplateAction("2時間", postdata+"c", ""),
-						linebot.NewPostbackTemplateAction("3時間", postdata+"d", ""),
+						linebot.NewPostbackTemplateAction("1時間", postdata+"t_a", ""),
+						linebot.NewPostbackTemplateAction("1.5時間", postdata+"t_b", ""),
+						linebot.NewPostbackTemplateAction("2時間", postdata+"t_c", ""),
+						linebot.NewPostbackTemplateAction("3時間", postdata+"t_d", ""),
 					)
 					message := linebot.NewTemplateMessage(smart, template)
 					fmt.Printf("%v", template)
