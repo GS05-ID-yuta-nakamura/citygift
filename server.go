@@ -89,7 +89,7 @@ func main() {
 					}
 				}
 			} else if event.Type == linebot.EventTypeFollow {
-				imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
+				imageURL := "https://citygifttest.azurewebsites.net/citygift/static/top.jpg"
 				phrase := "友達追加ありがとうございます。citygiftは対話型サービスとなっています。"
 				template := linebot.NewButtonsTemplate(
 					imageURL, "Welcome to citygift", phrase,
@@ -111,7 +111,7 @@ func main() {
 						log.Print(err)
 					}
 				} else if postdata == "a" {
-					imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
+					imageURL := "https://citygifttest.azurewebsites.net/github.com/citygift/static/top.jpg"
 					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 					template := linebot.NewCarouselTemplate(
 						linebot.NewCarouselColumn(
