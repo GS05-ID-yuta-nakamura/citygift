@@ -174,7 +174,7 @@ func main() {
 					).Do(); err != nil {
 						log.Print(err)
 					}
-				} else if strings.LastIndexAny(postdata, "getplan") > 0 && strings.LastIndexAny(postdata, ",t_") < 0 {
+				} else if strings.LastIndexAny(postdata, "getplan,a_") > 0 {
 					imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
 					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 					phrase := "時間を選択してください"
