@@ -61,7 +61,7 @@ func main() {
 							log.Print(err)
 						}
 					} else {
-						imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
+						imageURL := "https://i.gyazo.com/5d4efccd13e741d5b31583955f648e17.png"
 						phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 						template := linebot.NewButtonsTemplate(
 							imageURL, "Welcome to citygift", phrase,
