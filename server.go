@@ -165,12 +165,14 @@ func main() {
 					message1 := linebot.NewTextMessage("おすすめのプランを探して参りました。")
 					message2 := linebot.NewTemplateMessage(smart, template)
 					message3 := linebot.NewTemplateMessage(smart, template2)
+					message4 := linebot.NewTextMessage(postdata)
 					fmt.Printf("%v", template)
 					if _, err := bot.ReplyMessage(
 						event.ReplyToken,
 						message1,
 						message2,
 						message3,
+						message4,
 					).Do(); err != nil {
 						log.Print(err)
 					}
@@ -185,11 +187,13 @@ func main() {
 						linebot.NewPostbackTemplateAction("2時間", postdata+"t_c", ""),
 						linebot.NewPostbackTemplateAction("3時間", postdata+"t_d", ""),
 					)
-					message := linebot.NewTemplateMessage(smart, template)
+					message1 := linebot.NewTemplateMessage(smart, template)
+					message2 := linebot.NewTextMessage(postdata)
 					fmt.Printf("%v", template)
 					if _, err := bot.ReplyMessage(
 						event.ReplyToken,
-						message,
+						message1,
+						message2,
 					).Do(); err != nil {
 						log.Print(err)
 					}
