@@ -155,7 +155,7 @@ func main() {
 					imageURL := "https://i.gyazo.com/07fc78aad487e5f433868a93b9ed37ab.png"
 					phrase := "表参道エリア3時間満喫コース"
 					template := linebot.NewButtonsTemplate(
-						imageURL, "Welcome to citygift", phrase,
+						imageURL, "Please enjoy citygift", phrase,
 						linebot.NewURITemplateAction("webでみる", "https://citygift-04.herokuapp.com/"),
 					)
 					template2 := linebot.NewConfirmTemplate(
