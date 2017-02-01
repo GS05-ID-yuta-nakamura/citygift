@@ -47,7 +47,7 @@ func main() {
 						phrase := "セカイを変えるGEEKを輩出するエンジニア養成学校"
 						template := linebot.NewButtonsTemplate(
 							imageURL, title, phrase,
-							linebot.NewURITemplateAction(title+" Web", "https://citygift-04.herokuapp.com/"),
+							linebot.NewURITemplateAction(title+" Web", "http://gsacademy.tokyo/"),
 							linebot.NewURITemplateAction("citygift公式", "https://citygift-04.herokuapp.com/"),
 						)
 						messaget := "プランはいかがでしたでしょうか？近くにあるオススメスポットも紹介いたします。"
@@ -167,14 +167,12 @@ func main() {
 					message1 := linebot.NewTextMessage("おすすめのプランを探して参りました。")
 					message2 := linebot.NewTemplateMessage(smart, template)
 					message3 := linebot.NewTemplateMessage(smart, template2)
-					message4 := linebot.NewTextMessage(postdata)
 					fmt.Printf("%v", template)
 					if _, err := bot.ReplyMessage(
 						event.ReplyToken,
 						message1,
 						message2,
 						message3,
-						message4,
 					).Do(); err != nil {
 						log.Print(err)
 					}
@@ -200,12 +198,10 @@ func main() {
 						linebot.NewPostbackTemplateAction("3時間", postdata+"t_d", ""),
 					)
 					message1 := linebot.NewTemplateMessage(smart, template)
-					message2 := linebot.NewTextMessage(postdata)
 					fmt.Printf("%v", template)
 					if _, err := bot.ReplyMessage(
 						event.ReplyToken,
 						message1,
-						message2,
 					).Do(); err != nil {
 						log.Print(err)
 					}
