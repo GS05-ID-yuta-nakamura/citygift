@@ -149,7 +149,7 @@ func main() {
 					).Do(); err != nil {
 						log.Print(err)
 					}
-				} else if postdata == "getplan,a_shibuya,d" {
+				} else if postdata == "getplan,a_shibuya,t_d" {
 					imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
 					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 					phrase := "表参道エリア3時間満喫コース"
