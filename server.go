@@ -95,7 +95,7 @@ func main() {
 					}
 				}
 			} else if event.Type == linebot.EventTypeFollow {
-				imageURL := "https://i.gyazo.com/07fc78aad487e5f433868a93b9ed37ab.png"
+				imageURL := "https://i.gyazo.com/48ad5862f885dc15173a6f59aaab20b2.png"
 				phrase := "友達追加ありがとうございます。citygiftは対話型の街歩きプラン紹介サービスです。"
 				template := linebot.NewButtonsTemplate(
 					imageURL, "Welcome to citygift", phrase,
@@ -153,7 +153,6 @@ func main() {
 					}
 				} else if postdata == "getplan,a_shibuya,t_d" {
 					imageURL := "https://i.gyazo.com/07fc78aad487e5f433868a93b9ed37ab.png"
-					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 					phrase := "表参道エリア3時間満喫コース"
 					template := linebot.NewButtonsTemplate(
 						imageURL, "Welcome to citygift", phrase,
@@ -187,7 +186,7 @@ func main() {
 						log.Print(err)
 					}
 				} else if strings.LastIndexAny(postdata, "getplan,a_") > 0 {
-					imageURL := "https://i.gyazo.com/a6c34dbe210a85412a59f1d21bf7d8db.png"
+					imageURL := "https://i.gyazo.com/48ad5862f885dc15173a6f59aaab20b2.png"
 					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 					phrase := "時間を選択してください"
 					template := linebot.NewButtonsTemplate(
