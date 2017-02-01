@@ -20,7 +20,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	smart := "本サービスはスマートホンからの対応になっております。ボタンが表示されない場合は、Lineのversionが7以上かもお確かめください"
+	smart := "citygift template mode"
 	http.HandleFunc("/", handler)
 	// Setup HTTP Server for receiving requests from LINE platform
 	http.HandleFunc("/callback", func(w http.ResponseWriter, req *http.Request) {
@@ -41,7 +41,7 @@ func main() {
 					fmt.Printf("%v", message)
 					//textmessage
 					if userRequest := message.Text; userRequest == "プラン終了" {
-						imageURL := "github.com/gogit/citygift/static/top.jpg"
+						imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
 						phrase := "いかがでしたでしょうか？近くにあるオススメスポットを紹介いたします。"
 						template := linebot.NewButtonsTemplate(
 							imageURL, "Thank you for your coming", phrase,
@@ -90,17 +90,20 @@ func main() {
 				}
 			} else if event.Type == linebot.EventTypeFollow {
 				imageURL := "https://citygifttest.azurewebsites.net/citygift/static/top.jpg"
-				phrase := "友達追加ありがとうございます。citygiftは対話型サービスとなっています。"
+				phrase := "友達追加ありがとうございます。citygiftは対話型の街歩きプラン紹介サービスです。"
 				template := linebot.NewButtonsTemplate(
 					imageURL, "Welcome to citygift", phrase,
 					linebot.NewURITemplateAction("citygiftとは？", "https://citygift-04.herokuapp.com/"),
 					linebot.NewPostbackTemplateAction("プランスタート", "a", ""),
 					linebot.NewPostbackTemplateAction("プラン投稿", "b", ""),
 				)
-				fmt.Printf("%v", template)
+				smart := "本サービスはスマートホン推奨になっております。ボタンが表示されない場合は、Lineのversionが7以上かもお確かめください。"
+				message1 := linebot.NewTextMessage(smart)
+				message2 := linebot.NewTemplateMessage(smart, template)
 				if _, err := bot.ReplyMessage(
 					event.ReplyToken,
-					linebot.NewTemplateMessage(smart, template),
+					message1,
+					message2,
 				).Do(); err != nil {
 					log.Print(err)
 				}
