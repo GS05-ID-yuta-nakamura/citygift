@@ -42,15 +42,20 @@ func main() {
 					//textmessage
 					if userRequest := message.Text; userRequest == "プラン終了" {
 						imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
-						phrase := "いかがでしたでしょうか？近くにあるオススメスポットを紹介いたします。"
+						title := "G's Academy"
+						phrase := "セカイを変えるGEEKを輩出するエンジニア養成学校"
 						template := linebot.NewButtonsTemplate(
-							imageURL, "Thank you for your coming", phrase,
-							linebot.NewURITemplateAction("G's academy", "https://citygift-04.herokuapp.com/"),
+							imageURL, title, phrase,
+							linebot.NewURITemplateAction(title+" Web", "https://citygift-04.herokuapp.com/"),
 							linebot.NewURITemplateAction("citygift公式", "https://citygift-04.herokuapp.com/"),
 						)
+						messaget := "プランはいかがでしたでしょうか？近くにあるオススメスポットも紹介いたします。"
+						message1 := linebot.NewTextMessage(messaget)
+						message2 := linebot.NewTemplateMessage(smart, template)
 						if _, err := bot.ReplyMessage(
 							event.ReplyToken,
-							linebot.NewTemplateMessage(smart, template),
+							message1,
+							message2,
 						).Do(); err != nil {
 							log.Print(err)
 						}
