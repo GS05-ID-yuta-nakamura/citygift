@@ -95,7 +95,7 @@ func main() {
 					}
 				}
 			} else if event.Type == linebot.EventTypeFollow {
-				imageURL := "https://i.gyazo.com/48ad5862f885dc15173a6f59aaab20b2.png"
+				imageURL := "https://i.gyazo.com/585f6847bf2df3b1f946adbf4447856a.png"
 				phrase := "友達追加ありがとうございます。citygiftは対話型の街歩きプラン紹介サービスです。"
 				template := linebot.NewButtonsTemplate(
 					imageURL, "Welcome to citygift", phrase,
@@ -123,7 +123,7 @@ func main() {
 				} else if postdata == "getplan," {
 					imageURL1 := "https://i.gyazo.com/067122fadcfbf1bcfbe7971794044425.png"
 					imageURL2 := "https://i.gyazo.com/2f0523f20151aa9f1106f0e606a01575.png"
-					imageURL3 := "https://i.gyazo.com/e26c833d0ff2f1064543785ef54a08b8.png"
+					imageURL3 := "https://i.gyazo.com/f6690c376d16d62fe929a2b9e0f39edf.png"
 					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 					shibuya := postdata + "a_shibuya,"
 					fmt.Printf("%v", shibuya)
@@ -141,7 +141,7 @@ func main() {
 							linebot.NewPostbackTemplateAction("選択", postdata+"a_kamakura,", ""),
 						),
 					)
-					message1 := linebot.NewTextMessage("以下のareaからお好きな場所を選択するか位置情報をお送りください")
+					message1 := linebot.NewTextMessage("プランスタートします。以下のareaからお好きな場所を選択するか位置情報をお送りください。")
 					message2 := linebot.NewTemplateMessage(smart, template)
 					fmt.Printf("%v", template)
 					if _, err := bot.ReplyMessage(
@@ -186,7 +186,7 @@ func main() {
 						log.Print(err)
 					}
 				} else if strings.LastIndexAny(postdata, "getplan,a_") > 0 {
-					imageURL := "https://i.gyazo.com/48ad5862f885dc15173a6f59aaab20b2.png"
+					imageURL := "https://i.gyazo.com/585f6847bf2df3b1f946adbf4447856a.png"
 					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 					phrase := "時間を選択してください"
 					template := linebot.NewButtonsTemplate(
