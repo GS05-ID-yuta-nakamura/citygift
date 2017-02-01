@@ -178,6 +178,16 @@ func main() {
 					).Do(); err != nil {
 						log.Print(err)
 					}
+				} else if postdata := event.Postback.Data; postdata == "yes" {
+					message1 := linebot.NewTextMessage("ぜひお楽しみください。")
+					message2 := linebot.NewTextMessage("終了の際は『プラン終了』とご入力ください。")
+					if _, err := bot.ReplyMessage(
+						event.ReplyToken,
+						message1,
+						message2,
+					).Do(); err != nil {
+						log.Print(err)
+					}
 				} else if strings.LastIndexAny(postdata, "getplan,a_") > 0 {
 					imageURL := "https://i.gyazo.com/fd032b4b9e12de31c77e3e9fd616e45e.png"
 					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
@@ -192,16 +202,6 @@ func main() {
 					message1 := linebot.NewTemplateMessage(smart, template)
 					message2 := linebot.NewTextMessage(postdata)
 					fmt.Printf("%v", template)
-					if _, err := bot.ReplyMessage(
-						event.ReplyToken,
-						message1,
-						message2,
-					).Do(); err != nil {
-						log.Print(err)
-					}
-				} else if postdata := event.Postback.Data; postdata == "yes" {
-					message1 := linebot.NewTextMessage("ぜひお楽しみください。")
-					message2 := linebot.NewTextMessage("終了の際は『プラン終了』とご入力ください。")
 					if _, err := bot.ReplyMessage(
 						event.ReplyToken,
 						message1,
