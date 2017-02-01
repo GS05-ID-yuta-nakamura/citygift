@@ -126,15 +126,15 @@ func main() {
 					template := linebot.NewCarouselTemplate(
 						linebot.NewCarouselColumn(
 							imageURL, "渋谷エリア", "渋谷・表参道・原宿・代々木上原",
-							linebot.NewPostbackTemplateAction("選択", postdata+"shibuya_a,", ""),
+							linebot.NewPostbackTemplateAction("選択", postdata+"a_shibuya,", ""),
 						),
 						linebot.NewCarouselColumn(
 							imageURL, "練馬エリア", "石神井公園・練馬・江古田",
-							linebot.NewPostbackTemplateAction("選択", postdata+"nerima_a,", ""),
+							linebot.NewPostbackTemplateAction("選択", postdata+"a_nerima,", ""),
 						),
 						linebot.NewCarouselColumn(
 							imageURL, "鎌倉エリア", "鎌倉..",
-							linebot.NewPostbackTemplateAction("選択", postdata+"kamakura_a,", ""),
+							linebot.NewPostbackTemplateAction("選択", postdata+"a_kamakura,", ""),
 						),
 					)
 					message1 := linebot.NewTextMessage("以下のareaからお好きな場所を選択するか位置情報をお送りください")
@@ -147,26 +147,7 @@ func main() {
 					).Do(); err != nil {
 						log.Print(err)
 					}
-				} else if strings.LastIndexAny(postdata, "getplan") > 0 {
-					imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
-					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
-					phrase := "時間を選択してください"
-					template := linebot.NewButtonsTemplate(
-						imageURL, "Welcome to citygift", phrase,
-						linebot.NewPostbackTemplateAction("1時間", postdata+"a", ""),
-						linebot.NewPostbackTemplateAction("1.5時間", postdata+"b", ""),
-						linebot.NewPostbackTemplateAction("2時間", postdata+"c", ""),
-						linebot.NewPostbackTemplateAction("3時間", postdata+"d", ""),
-					)
-					message := linebot.NewTemplateMessage(smart, template)
-					fmt.Printf("%v", template)
-					if _, err := bot.ReplyMessage(
-						event.ReplyToken,
-						message,
-					).Do(); err != nil {
-						log.Print(err)
-					}
-				} else if postdata == "getplan,shibuya_a," {
+				} else if postdata == "getplan,a_shibuya,a" {
 					imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
 					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 					phrase := "表参道エリア3時間満喫コース"
@@ -188,6 +169,25 @@ func main() {
 						message1,
 						message2,
 						message3,
+					).Do(); err != nil {
+						log.Print(err)
+					}
+				} else if strings.LastIndexAny(postdata, "getplan") > 0 && strings.LastIndexAny(postdata, "getplan,a_") < 0 {
+					imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
+					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
+					phrase := "時間を選択してください"
+					template := linebot.NewButtonsTemplate(
+						imageURL, "Welcome to citygift", phrase,
+						linebot.NewPostbackTemplateAction("1時間", postdata+"a", ""),
+						linebot.NewPostbackTemplateAction("1.5時間", postdata+"b", ""),
+						linebot.NewPostbackTemplateAction("2時間", postdata+"c", ""),
+						linebot.NewPostbackTemplateAction("3時間", postdata+"d", ""),
+					)
+					message := linebot.NewTemplateMessage(smart, template)
+					fmt.Printf("%v", template)
+					if _, err := bot.ReplyMessage(
+						event.ReplyToken,
+						message,
 					).Do(); err != nil {
 						log.Print(err)
 					}
