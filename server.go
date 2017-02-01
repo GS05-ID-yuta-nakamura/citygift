@@ -89,7 +89,19 @@ func main() {
 					}
 				}
 			} else if event.Type == linebot.EventTypeFollow {
-				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("友達追加ありがとうございます。街歩き体験サービス『citygift』の公式アカウントです！citygiftについてもっと知りたい方は、『citygiftとは？』と入力ください(wink)プランをお探しの方は、『プランスタート』と入力くださいプランを投稿される方は、『プラン投稿』と入力ください。")).Do(); err != nil {
+				imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
+				phrase := "友達追加ありがとうございます。citygiftは対話型サービスとなっています。"
+				template := linebot.NewButtonsTemplate(
+					imageURL, "Welcome to citygift", phrase,
+					linebot.NewURITemplateAction("citygiftとは？", "https://citygift-04.herokuapp.com/"),
+					linebot.NewPostbackTemplateAction("プランスタート", "a", ""),
+					linebot.NewPostbackTemplateAction("プラン投稿", "b", ""),
+				)
+				fmt.Printf("%v", template)
+				if _, err := bot.ReplyMessage(
+					event.ReplyToken,
+					linebot.NewTemplateMessage("Button template", template),
+				).Do(); err != nil {
 					log.Print(err)
 				}
 			} else if event.Type == linebot.EventTypePostback {
