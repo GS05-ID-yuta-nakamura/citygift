@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
@@ -65,8 +66,8 @@ func main() {
 						template := linebot.NewButtonsTemplate(
 							imageURL, "Welcome to citygift", phrase,
 							linebot.NewURITemplateAction("citygiftとは？", "https://citygift-04.herokuapp.com/"),
-							linebot.NewPostbackTemplateAction("プランスタート", "a", ""),
-							linebot.NewPostbackTemplateAction("プラン投稿", "b", ""),
+							linebot.NewPostbackTemplateAction("プランスタート", "getplan,", ""),
+							linebot.NewPostbackTemplateAction("プラン投稿", "pushplan,", ""),
 						)
 						fmt.Printf("%v", template)
 						if _, err := bot.ReplyMessage(
@@ -99,8 +100,8 @@ func main() {
 				template := linebot.NewButtonsTemplate(
 					imageURL, "Welcome to citygift", phrase,
 					linebot.NewURITemplateAction("citygiftとは？", "https://citygift-04.herokuapp.com/"),
-					linebot.NewPostbackTemplateAction("プランスタート", "a", ""),
-					linebot.NewPostbackTemplateAction("プラン投稿", "b", ""),
+					linebot.NewPostbackTemplateAction("プランスタート", "getplan,", ""),
+					linebot.NewPostbackTemplateAction("プラン投稿", "pushplan,", ""),
 				)
 				smart := "本サービスはスマートホン推奨になっております。ボタンが表示されない場合は、Lineのversionが7以上かもお確かめください。"
 				message1 := linebot.NewTextMessage(smart)
@@ -113,26 +114,27 @@ func main() {
 					log.Print(err)
 				}
 			} else if event.Type == linebot.EventTypePostback {
-				if postdata := event.Postback.Data; postdata == "b" {
+
+				if postdata := event.Postback.Data; postdata == "pushplan," {
 					sorry := "プラン投稿機能はまだ実装できておりません。今しばらくお待ち下さい。"
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(sorry)).Do(); err != nil {
 						log.Print(err)
 					}
-				} else if postdata == "a" {
+				} else if postdata == "getplan," {
 					imageURL := "https://citygifttest.azurewebsites.net/github.com/citygift/static/top.jpg"
 					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 					template := linebot.NewCarouselTemplate(
 						linebot.NewCarouselColumn(
 							imageURL, "渋谷エリア", "渋谷・表参道・原宿・代々木上原",
-							linebot.NewPostbackTemplateAction("選択", postdata+"a", ""),
+							linebot.NewPostbackTemplateAction("選択", postdata+"shibuya_a,", ""),
 						),
 						linebot.NewCarouselColumn(
 							imageURL, "練馬エリア", "石神井公園・練馬・江古田",
-							linebot.NewPostbackTemplateAction("選択", postdata+"b", ""),
+							linebot.NewPostbackTemplateAction("選択", postdata+"nerima_a,", ""),
 						),
 						linebot.NewCarouselColumn(
 							imageURL, "鎌倉エリア", "鎌倉..",
-							linebot.NewPostbackTemplateAction("選択", postdata+"c", ""),
+							linebot.NewPostbackTemplateAction("選択", postdata+"kamakura_a,", ""),
 						),
 					)
 					message1 := linebot.NewTextMessage("以下のareaからお好きな場所を選択するか位置情報をお送りください")
@@ -145,7 +147,7 @@ func main() {
 					).Do(); err != nil {
 						log.Print(err)
 					}
-				} else if postdata == "aa" {
+				} else if strings.LastIndexAny(postdata, "getplan") > 0 {
 					imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
 					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 					phrase := "時間を選択してください"
