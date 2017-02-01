@@ -190,7 +190,7 @@ func main() {
 					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 					phrase := "時間を選択してください"
 					template := linebot.NewButtonsTemplate(
-						imageURL, "Welcome to citygift", phrase,
+						imageURL, "How much time do you have?", phrase,
 						linebot.NewPostbackTemplateAction("1時間", postdata+"t_a", ""),
 						linebot.NewPostbackTemplateAction("1.5時間", postdata+"t_b", ""),
 						linebot.NewPostbackTemplateAction("2時間", postdata+"t_c", ""),
