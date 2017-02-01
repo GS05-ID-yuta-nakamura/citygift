@@ -20,7 +20,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	smart := "本サービスはスマートホンからの対応になっております。ボタンが表示されない場合は、Lineのversionが7以上かもお確かめください"
 	http.HandleFunc("/", handler)
 	// Setup HTTP Server for receiving requests from LINE platform
 	http.HandleFunc("/callback", func(w http.ResponseWriter, req *http.Request) {
@@ -50,7 +50,7 @@ func main() {
 						)
 						if _, err := bot.ReplyMessage(
 							event.ReplyToken,
-							linebot.NewTemplateMessage("Button template", template),
+							linebot.NewTemplateMessage(smart, template),
 						).Do(); err != nil {
 							log.Print(err)
 						}
@@ -66,7 +66,7 @@ func main() {
 						fmt.Printf("%v", template)
 						if _, err := bot.ReplyMessage(
 							event.ReplyToken,
-							linebot.NewTemplateMessage("Button template", template),
+							linebot.NewTemplateMessage(smart, template),
 						).Do(); err != nil {
 							log.Print(err)
 						}
@@ -81,7 +81,7 @@ func main() {
 					if _, err := bot.ReplyMessage(
 						event.ReplyToken,
 						linebot.NewTemplateMessage(
-							"Confirm alt text",
+							smart,
 							template,
 						),
 					).Do(); err != nil {
@@ -100,7 +100,7 @@ func main() {
 				fmt.Printf("%v", template)
 				if _, err := bot.ReplyMessage(
 					event.ReplyToken,
-					linebot.NewTemplateMessage("Button template", template),
+					linebot.NewTemplateMessage(smart, template),
 				).Do(); err != nil {
 					log.Print(err)
 				}
@@ -128,7 +128,7 @@ func main() {
 						),
 					)
 					message1 := linebot.NewTextMessage("以下のareaからお好きな場所を選択するか位置情報をお送りください")
-					message2 := linebot.NewTemplateMessage("carousel template", template)
+					message2 := linebot.NewTemplateMessage(smart, template)
 					fmt.Printf("%v", template)
 					if _, err := bot.ReplyMessage(
 						event.ReplyToken,
@@ -148,7 +148,7 @@ func main() {
 						linebot.NewPostbackTemplateAction("2時間", postdata+"c", ""),
 						linebot.NewPostbackTemplateAction("3時間", postdata+"d", ""),
 					)
-					message := linebot.NewTemplateMessage("carousel template", template)
+					message := linebot.NewTemplateMessage(smart, template)
 					fmt.Printf("%v", template)
 					if _, err := bot.ReplyMessage(
 						event.ReplyToken,
@@ -170,8 +170,8 @@ func main() {
 						linebot.NewPostbackTemplateAction("No", "No", ""),
 					)
 					message1 := linebot.NewTextMessage("おすすめのプランを探して参りました。")
-					message2 := linebot.NewTemplateMessage("carousel template", template)
-					message3 := linebot.NewTemplateMessage("carousel template", template2)
+					message2 := linebot.NewTemplateMessage(smart, template)
+					message3 := linebot.NewTemplateMessage(smart, template2)
 					fmt.Printf("%v", template)
 					if _, err := bot.ReplyMessage(
 						event.ReplyToken,
