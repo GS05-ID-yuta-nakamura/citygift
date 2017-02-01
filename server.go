@@ -41,7 +41,7 @@ func main() {
 					fmt.Printf("%v", message)
 					//textmessage
 					if userRequest := message.Text; userRequest == "プラン終了" {
-						imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
+						imageURL := "github.com/gogit/citygift/static/top.jpg"
 						phrase := "いかがでしたでしょうか？近くにあるオススメスポットを紹介いたします。"
 						template := linebot.NewButtonsTemplate(
 							imageURL, "Thank you for your coming", phrase,
