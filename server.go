@@ -128,7 +128,7 @@ func main() {
 					template := linebot.NewCarouselTemplate(
 						linebot.NewCarouselColumn(
 							imageURL, "渋谷エリア", "渋谷・表参道・原宿・代々木上原",
-							linebot.NewPostbackTemplateAction("選択", shibuya, ""),
+							linebot.NewPostbackTemplateAction("選択", shibuya, "a_shibuya,"),
 						),
 						linebot.NewCarouselColumn(
 							imageURL, "練馬エリア", "石神井公園・練馬・江古田",
