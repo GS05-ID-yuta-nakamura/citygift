@@ -95,7 +95,7 @@ func main() {
 					}
 				}
 			} else if event.Type == linebot.EventTypeFollow {
-				imageURL := "https://citygifttest.azurewebsites.net/citygift/static/top.jpg"
+				imageURL := "https://i.gyazo.com/07fc78aad487e5f433868a93b9ed37ab.png"
 				phrase := "友達追加ありがとうございます。citygiftは対話型の街歩きプラン紹介サービスです。"
 				template := linebot.NewButtonsTemplate(
 					imageURL, "Welcome to citygift", phrase,
@@ -121,21 +121,23 @@ func main() {
 						log.Print(err)
 					}
 				} else if postdata == "getplan," {
-					imageURL := "https://citygifttest.azurewebsites.net/github.com/citygift/static/top.jpg"
+					imageURL1 := "https://i.gyazo.com/067122fadcfbf1bcfbe7971794044425.png"
+					imageURL2 := "https://i.gyazo.com/2f0523f20151aa9f1106f0e606a01575.png"
+					imageURL3 := "https://i.gyazo.com/e26c833d0ff2f1064543785ef54a08b8.png"
 					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 					shibuya := postdata + "a_shibuya,"
 					fmt.Printf("%v", shibuya)
 					template := linebot.NewCarouselTemplate(
 						linebot.NewCarouselColumn(
-							imageURL, "渋谷エリア", "渋谷・表参道・原宿・代々木上原",
+							imageURL1, "渋谷エリア", "渋谷・表参道・原宿・代々木上原",
 							linebot.NewPostbackTemplateAction("選択", postdata+"a_shibuya,", ""),
 						),
 						linebot.NewCarouselColumn(
-							imageURL, "練馬エリア", "石神井公園・練馬・江古田",
+							imageURL2, "練馬エリア", "石神井公園・練馬・江古田",
 							linebot.NewPostbackTemplateAction("選択", postdata+"a_nerima,", ""),
 						),
 						linebot.NewCarouselColumn(
-							imageURL, "鎌倉エリア", "鎌倉..",
+							imageURL3, "鎌倉エリア", "鎌倉..",
 							linebot.NewPostbackTemplateAction("選択", postdata+"a_kamakura,", ""),
 						),
 					)
@@ -150,7 +152,7 @@ func main() {
 						log.Print(err)
 					}
 				} else if postdata == "getplan,a_shibuya,t_d" {
-					imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
+					imageURL := "https://i.gyazo.com/07fc78aad487e5f433868a93b9ed37ab.png"
 					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 					phrase := "表参道エリア3時間満喫コース"
 					template := linebot.NewButtonsTemplate(
@@ -177,7 +179,7 @@ func main() {
 						log.Print(err)
 					}
 				} else if strings.LastIndexAny(postdata, "getplan,a_") > 0 {
-					imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
+					imageURL := "https://i.gyazo.com/fd032b4b9e12de31c77e3e9fd616e45e.png"
 					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 					phrase := "時間を選択してください"
 					template := linebot.NewButtonsTemplate(
