@@ -186,7 +186,7 @@ func main() {
 						log.Print(err)
 					}
 				} else if strings.LastIndexAny(postdata, "getplan,a_") > 0 {
-					imageURL := "https://i.gyazo.com/585f6847bf2df3b1f946adbf4447856a.png"
+					imageURL := "https://i.gyazo.com/0ff5a9cafaaecaa78fee8cc46c12405b.png"
 					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 					phrase := "時間を選択してください"
 					template := linebot.NewButtonsTemplate(
