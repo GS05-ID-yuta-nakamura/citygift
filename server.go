@@ -42,7 +42,7 @@ func main() {
 					fmt.Printf("%v", message)
 					//textmessage
 					if userRequest := message.Text; userRequest == "プラン終了" {
-						imageURL := "https://citygifttest.azurewebsites.net/static/top.jpg"
+						imageURL := "https://i.gyazo.com/4a54772b4cdf46e7930e5b18d9df85a2.png"
 						title := "G's Academy"
 						phrase := "セカイを変えるGEEKを輩出するエンジニア養成学校"
 						template := linebot.NewButtonsTemplate(
@@ -189,7 +189,7 @@ func main() {
 						log.Print(err)
 					}
 				} else if strings.LastIndexAny(postdata, "getplan,a_") > 0 {
-					imageURL := "https://i.gyazo.com/fd032b4b9e12de31c77e3e9fd616e45e.png"
+					imageURL := "https://i.gyazo.com/a6c34dbe210a85412a59f1d21bf7d8db.png"
 					// phrase := "連絡ありがとうございます。citygiftは対話型サービスとなっています。"
 					phrase := "時間を選択してください"
 					template := linebot.NewButtonsTemplate(
