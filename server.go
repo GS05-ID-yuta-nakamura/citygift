@@ -151,7 +151,7 @@ func main() {
 					).Do(); err != nil {
 						log.Print(err)
 					}
-				} else if strings.LastIndexAny(postdata, "getplan,a_shibuya,t_") > 0 {
+				} else if postdata == "getplan,a_shibuya,t_d," {
 					imageURL := "https://i.gyazo.com/07fc78aad487e5f433868a93b9ed37ab.png"
 					phrase := "表参道エリア3時間満喫コース"
 					template := linebot.NewButtonsTemplate(
