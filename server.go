@@ -156,7 +156,7 @@ func main() {
 					phrase := "表参道エリア3時間満喫コース"
 					template := linebot.NewButtonsTemplate(
 						imageURL, "Please enjoy citygift", phrase,
-						linebot.NewURITemplateAction("webでみる", "https://citygift-04.herokuapp.com/"),
+						linebot.NewURITemplateAction("webでみる", "https://citygift-04.herokuapp.com/plan1"),
 					)
 					template2 := linebot.NewConfirmTemplate(
 						"こちらのプランでよろしいですか?",
